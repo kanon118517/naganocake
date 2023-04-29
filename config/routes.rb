@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'customers/my_page' => "customers#show", as: 'my_page'
+  get 'customers/information/edit' => "customers#edit", as: 'information'
+  patch 'customers/information' => "customers#update", as: 'information_update'
+  get 'customers/confirm' => "customers#confirm", as: 'confirm'
+  patch '/withdrawal' => "customers#withdrawal"
   devise_for :admins, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
@@ -9,7 +14,7 @@ Rails.application.routes.draw do
 }
 
   root to: 'homes#top'
-  get "homes/about" => "homes#about", as: 'about'
+  get "/about" => "homes#about", as: 'about'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 

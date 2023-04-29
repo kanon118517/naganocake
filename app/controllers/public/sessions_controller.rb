@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
+
   # before_action :configure_sign_in_params, only: [:create]
+  #before_acrion :customer_state, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -27,6 +29,7 @@ class Public::SessionsController < Devise::SessionsController
 
   protected
 
+
 def customer_state
 
   @customer = Customer.find_by(email: params[:customer][:email])
@@ -34,6 +37,11 @@ def customer_state
   return if !@customer
 
   if @customer.valid_password?(params[:customer][:password])
+
+  elsif (params[:customer][:is_deleted]) && true
+    redirect_to customer_session_path
+  else
+    redirect_to new_customer_registration_path
   end
 end
 

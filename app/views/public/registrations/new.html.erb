@@ -6,15 +6,15 @@
   <div class = "field">
     <%= f.label "名前" %>
     <p>姓</p>
-    <%= f.last_name_field :last_name %>
+    <%= f.text_field :last_name %>
     <p>名</p>
-    <%= f.first_name_field :first_name %>
+    <%= f.text_field :first_name %>
   </div>
 
   <div class = "field">
     <%= f.label "フリガナ" %>
-    <p>セイ</p><%= f.last_name_kana_field :last_name_kana %>
-    <p>メイ</p><%= f.first_name_kana_field :first_name_kana %>
+    <p>セイ</p><%= f.text_field :last_name_kana %>
+    <p>メイ</p><%= f.text_field :first_name_kana %>
   </div>
 
   <div class="field">
@@ -24,29 +24,29 @@
 
   <div class = "field">
     <%= f.label "郵便番号（ハイフンなし）" %>
-    <%= f.postal_code_field :postal_code %>
+    <%= f.text_field :postal_code %>
   </div>
 
   <div class = "field">
     <%= f.label "住所" %>
-    <%= f.address_field :address %>
+    <%= f.text_field :address %>
   </div>
 
   <div class = "field">
     <%= f.label "電話番号（ハイフンなし）" %>
-    <%= f.telephone_number_field :telephone_number %>
+    <%= f.text_field :telephone_number %>
   </div>
 
   <div class="field">
     <%= f.label "パスワード" %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(<%= @minimum_password_length %> 文字以上)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label "確認用パスワード" %><br />
+    <%= f.label "パスワード（確認用）" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
