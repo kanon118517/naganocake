@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :items, only: [:new, :index, :show, :edit]
+  end
   get 'customers/my_page' => "customers#show", as: 'my_page'
   get 'customers/information/edit' => "customers#edit", as: 'information'
   patch 'customers/information' => "customers#update", as: 'information_update'
