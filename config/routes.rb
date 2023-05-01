@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
+
   namespace :admin do
-    resources :items, only: [:new, :index, :show, :edit]
+    resources :items, only: [:new, :create, :index, :show, :edit, :update]
   end
+
   get 'customers/my_page' => "customers#show", as: 'my_page'
   get 'customers/information/edit' => "customers#edit", as: 'information'
   patch 'customers/information' => "customers#update", as: 'information_update'
   get 'customers/confirm' => "customers#confirm", as: 'confirm'
   patch '/withdrawal' => "customers#withdrawal"
+
   devise_for :admins, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }

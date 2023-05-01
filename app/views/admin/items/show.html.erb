@@ -1,2 +1,9 @@
-<h1>Admin::Items#show</h1>
-<p>Find me in app/views/admin/items/show.html.erb</p>
+<h2>商品詳細</h2>
+
+<div>
+  <%= image_tag @item.image %>
+  <p>商品名：<%= @item.name %></p>
+  <p>商品説明：<%= @item.introduction %></p>
+  <p>税込価格（税抜価格）：<%= number_to_currency(@item.price*1.08, locale => 'en') %>(<%= number_to_currency(@item.price) %>)円</p>
+
+</div>
