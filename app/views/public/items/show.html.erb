@@ -1,0 +1,8 @@
+<div>
+
+<%= image_tag @item.image %>
+<h4><%= @item.name %></h4>
+<p><%= @item.introduction %></p>
+<p>￥<%= number_to_currency(@item.price*1.1, :locale => 'en') %>(税込)</p>
+
+</div>

@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
+    get 'items' => "public/items#index", as: 'items'
+    get 'items/:id' => "public/items#show", as: 'item'
+
   namespace :admin do
     resources :items, only: [:new, :create, :index, :show, :edit, :update]
+    resources :customers, only: [:index, :show, :edit]
   end
 
   get 'customers/my_page' => "customers#show", as: 'my_page'
