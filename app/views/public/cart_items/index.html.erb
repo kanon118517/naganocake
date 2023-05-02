@@ -1,0 +1,15 @@
+<h2>ショッピングカート</h2>
+<% @cart_items.each do |cart_item| %>
+<p>商品名</p>
+<%= cart_item.item.name %>
+<p>単価（税込）</p>
+<%= cart_item.item.with_tax_price%>
+<p>数量</p>
+<%= cart_item.amount %>
+<p>小計</p>
+<%= cart_item.subtotal%>
+
+<p>合計</p>
+<%= @total.round.to_s(:delimited)%>
+
+<% end %>

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+
+    get 'cart_items' => "public/cart_items#index", as: 'cart_items'
+    post 'cart_items' => "public/cart_items#create", as: 'create_cart_items'
     get 'items' => "public/items#index", as: 'items'
     get 'items/:id' => "public/items#show", as: 'item'
 
