@@ -6,10 +6,15 @@
 <%= cart_item.item.with_tax_price%>
 <p>数量</p>
 <%= cart_item.amount %>
+
 <p>小計</p>
 <%= cart_item.subtotal%>
+
+<%= link_to "削除",destroy_cart_item_path(cart_item.id),method: :delete, "data-confirm" => "本当に削除しますか？" %>
+
+
+<% end %>
 
 <p>合計</p>
 <%= @total.round.to_s(:delimited)%>
 
-<% end %>
