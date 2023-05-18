@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
 
 
+
     get 'cart_items' => "public/cart_items#index", as: 'cart_items'
     post 'cart_items' => "public/cart_items#create", as: 'create_cart_items'
-    delete 'cart_items/:id' => "public/cart_items#destroy", as: 'destroy_cart_item'
+    delete 'cart_items/all_destroy' => "public/cart_items#destroy_all", as: 'destroy_all'
+    patch 'cart_items/:id' => "public/cart_items#update", as: 'update_cart_items'
+    delete 'cart_items/:id' => "public/cart_items#destroy", as: 'destroy_cart_items'
     get 'items' => "public/items#index", as: 'items'
     get 'items/:id' => "public/items#show", as: 'item'
 

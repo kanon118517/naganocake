@@ -1,19 +1,27 @@
 <h2>ショッピングカート</h2>
+<%= link_to "カートを空にする",destroy_all_path(@cart_items),method: :delete, "data-confirm" => "本当に削除しますか？" %>
+
+
 <% @cart_items.each do |cart_item| %>
+<%= form_with model: cart_item,url:update_cart_items_path(cart_item.id),method: :patch do |f| %>
+
 <p>商品名</p>
 <%= cart_item.item.name %>
 <p>単価（税込）</p>
 <%= cart_item.item.with_tax_price%>
 <p>数量</p>
-<%= cart_item.amount %>
-
+<%= f.select :amount, *[1..10], :selected =>cart_item.amount %>
+<%= f.submit '変更' %>
 <p>小計</p>
 <%= cart_item.subtotal%>
 
-<%= link_to "削除",destroy_cart_item_path(cart_item.id),method: :delete, "data-confirm" => "本当に削除しますか？" %>
+<%= link_to "削除",destroy_cart_items_path(cart_item.id),method: :delete, "data-confirm" => "本当に削除しますか？" %>
 
 
 <% end %>
+<% end %>
+
+<%= link_to "買い物を続ける",items_path %>
 
 <p>合計</p>
 <%= @total.round.to_s(:delimited)%>
