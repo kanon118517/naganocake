@@ -1,1 +1,24 @@
 <h2>注文情報確認</h2>
+
+<% @cart_items.each do |cart_item| %>
+
+<%= cart_item.item.name %>
+<%= cart_item.item.with_tax_price %>
+<%= cart_item.amount %>
+
+<% end %>
+
+<p>送料</p>
+<p>800</p>
+<p>商品合計</p>
+<%= @total.round.to_s(:delimited) %>
+<p>請求金額</p>
+<%= 800 + @total.round.to_s(:delimited) %>
+
+<p>支払方法</p>
+<%= @order.payment_methods_i18n %>
+
+<p>お届け先</p>
+<%= @order.postal_code %>
+<%= @order.address %><br />
+<%= @order.name %>
