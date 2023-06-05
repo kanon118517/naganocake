@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-    
+
 
     get 'cart_items' => "public/cart_items#index", as: 'cart_items'
     post 'cart_items' => "public/cart_items#create", as: 'create_cart_items'
@@ -9,13 +9,13 @@ Rails.application.routes.draw do
     delete 'cart_items/:id' => "public/cart_items#destroy", as: 'destroy_cart_items'
     get 'items' => "public/items#index", as: 'items'
     get 'items/:id' => "public/items#show", as: 'item'
-    
+
     get 'orders/new' => "public/orders#new", as: 'new_orders'
-    get 'orders' => "pubulic/orders#index",as: 'orders'
-    get 'orders/:id' => "pubulic/orders#show", as: 'show_orders'
-    post 'orders/confirm' => "pubulic/orders#confirm", as: 'confirm_orders'
-    get 'orders/complete' => "pubulic/orders#complete", as: 'complete_orders'
+    get 'orders/complete' => "public/orders#complete", as: 'complete_orders'
+    post 'orders/confirm' => "public/orders#confirm", as: 'confirm_orders'
     post 'orders' => "public/orders#create", as: 'create_orders'
+    get 'orders' => "public/orders#index",as: 'orders'
+    get 'orders/:id' => "public/orders#show", as: 'show_orders'
 
   namespace :admin do
     resources :items, only: [:new, :create, :index, :show, :edit, :update]

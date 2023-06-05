@@ -13,6 +13,7 @@
 <%= '〒' + @customer.postal_code %>
 <%= @customer.address %><br />
 <%= @customer.last_name + @customer.first_name %><br />
+<%= f.hidden_field :delivery_charge, :value => @order.delivery_charge %>
 <%= f.submit "確認画面へ進む" %>
 
 <% end %>

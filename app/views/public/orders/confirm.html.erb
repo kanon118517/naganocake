@@ -1,7 +1,7 @@
 <h2>注文情報確認</h2>
-
+<%= form_with model: @order do |f| %>
 <% @cart_items.each do |cart_item| %>
-
+<%= f.hidden_field :customer_id, :value => current_customer.id %>
 <%= cart_item.item.name %>
 <%= cart_item.item.with_tax_price %>
 <%= cart_item.amount %>
@@ -9,16 +9,26 @@
 <% end %>
 
 <p>送料</p>
-<p>800</p>
+<%= f.hidden_field :delivery_charge, :value => @order.delivery_charge %>
+<%= @order.delivery_charge %>
 <p>商品合計</p>
 <%= @total.round.to_s(:delimited) %>
 <p>請求金額</p>
-<%= 800 + @total.round.to_s(:delimited) %>
+<%= f.hidden_field :payment, :value => @order.delivery_charge + @total.round %>
+<%= @order.delivery_charge + @total.round %>
 
 <p>支払方法</p>
-<%= @order.payment_methods_i18n %>
+<%= f.hidden_field :payment_method, :value => @order.payment_method %>
+<%= @order.payment_method_i18n %>
 
 <p>お届け先</p>
-<%= @order.postal_code %>
-<%= @order.address %><br />
-<%= @order.name %>
+<%= f.hidden_field :delivery_postal_code, :value => @order.delivery_postal_code %>
+<%= @order.delivery_postal_code %>
+<%= f.hidden_field :delivery_adress, :value => @order.delivery_adress %>
+<%= @order.delivery_adress %><br />
+<%= f.hidden_field :delivery_name, :value => @order.delivery_name %>
+<%= @order.delivery_name %>
+
+<%= f.submit "注文を確定する" %>
+
+<% end %>
