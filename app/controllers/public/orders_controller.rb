@@ -21,20 +21,38 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
+    @cart_items = current_customer.cart_items.all
     @order = Order.new(order_params)
-    @order.save
-    @cart_items = current_customer.cart_items
-    @cart_items.destroy_all
-    redirect_to complete_orders_path
+    if @order.save
+      @cart_items.each do |cart|
+        @order_item = OrderItem.new
+        @order_item.item_id = cart.item_id
+        @order_item.order_id = @order.id
+        @order_item.price = cart.item.with_tax_price
+        @order_item.amount = cart.amount
+        @order_item.save!
+      end
+      redirect_to complete_orders_path
+      @cart_items.destroy_all
+    else
+      @order = Order.new(order_params)
+      render :new
+    end
+
   end
 
   def index
-    @order = Order.all
-    @cart_item = CartItem.all
-  end
 
+    @orders = current_customer.orders.all
+
+    #@order_item = @orders.order_items
+    #@sum = @order_item.inject(0) { |sum, item| sum + item.subtotal }
+  end
+  
   def show
     @order = Order.find(params[:id])
+    @order_item = @order.order_items.all
+    @sum = @order_item.inject(0) { |sum, item| sum + item.subtotal }
   end
 
   private
@@ -42,5 +60,7 @@ class Public::OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(:customer_id, :payment_method, :delivery_charge, :delivery_postal_code, :delivery_adress, :delivery_name, :payment)
   end
+
+
 
 end

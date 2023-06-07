@@ -1,20 +1,22 @@
 <h2>注文履歴一覧</h2>
 
-<% @order.each do |order| %>
-<% @cart_item.each do |cart_item| %>
+<% @orders.each do |order| %>
 
-<h4>注文情報</h4>
-<p>注文日</p>
-<%= order.updated_at.strftime('%Y/%m/%d') %>
-<p>配送先</p>
-<%= order.delivery_postal_code %>
-<%= order.delivery_adress %>
-<%= order.delivery_name %>
-<p>注文商品</p>
-<%= cart_item.item.name %>
-<p>支払金額</p>
-<%= order.payment %>
+    <h4>注文情報</h4>
+    <p>注文日</p>
+    <%= order.created_at.strftime('%Y/%m/%d') %>
+    <p>配送先</p>
+    <%= order.delivery_postal_code %>
+    <%= order.delivery_adress %>
+    <%= order.delivery_name %>
+    <p>注文商品</p>
+    <% order.order_items.each do |order_item| %>
+        <%= order_item.item.name %>
+    <% end %>
+    <p>支払金額</p>
+    <%= order.payment %>
+    <p>注文詳細</p>
+    <%= link_to "表示する", show_orders_path(order.id) %>
 
 
-<% end %>
 <% end %>

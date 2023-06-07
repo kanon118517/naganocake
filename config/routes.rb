@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
 
-
     get 'cart_items' => "public/cart_items#index", as: 'cart_items'
     post 'cart_items' => "public/cart_items#create", as: 'create_cart_items'
     delete 'cart_items/all_destroy' => "public/cart_items#destroy_all", as: 'destroy_all'
@@ -18,8 +17,10 @@ Rails.application.routes.draw do
     get 'orders/:id' => "public/orders#show", as: 'show_orders'
 
   namespace :admin do
+    get '/' => "homes#top", as: 'top'
     resources :items, only: [:new, :create, :index, :show, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
+    resources :orders, only: [:show]
   end
 
   get 'customers/my_page' => "customers#show", as: 'my_page'
