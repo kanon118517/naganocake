@@ -1,10 +1,21 @@
+  <div class = "container">
 <h2>商品一覧</h2>
 
-<% @items.each do |item| %>
+        <div class = "row">
+         <div class = "col-sm-4">
+           <div class="d-flex flex-sm-wrap">
 
-<%= image_tag item.image %>
-<p><%= link_to item.name, item_path(item.id) %></p>
-<p>¥<%= item.price %></p>
+        <% @items.each do |item| %>
+           </div>
+        <%= image_tag item.image %>
+        <figcaption class="figure-caption">
+          <%= link_to item.name, item_path(item.id) %>
+          ¥<%= item.price %>
+        </figcaption>
 
-<% end %>
+        <% end %>
+
+</div>
+</div>
+</div>
 

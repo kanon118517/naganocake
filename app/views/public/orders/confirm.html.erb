@@ -1,38 +1,92 @@
+<div class = "container">
 <h2>注文情報確認</h2>
 <%= form_with model: @order do |f| %>
 
-<% @cart_items.each do |cart_item| %>
-<%= f.hidden_field :customer_id, :value => current_customer.id %>
+<div class = "row">
+    <div class = "col-md-8">
+        <table class = "table table-bordered">
+            <thead>
+                <tr>
+                    <th class="bg-light d-block d-md-table-cell"><div class = "text-center">商品名</div></th>
+                    <th class="bg-light d-block d-md-table-cell"><div class = "text-center">単価</div></th>
+                    <th class="bg-light d-block d-md-table-cell"><div class = "text-center">数量</div></th>
+                    <th class="bg-light d-block d-md-table-cell"><div class = "text-center">小計</div></th>
+                </tr>
+            </thead>
+            
+            <% @cart_items.each do |cart_item| %>
+            <%= f.hidden_field :customer_id, :value => current_customer.id %>
 
-<%= cart_item.item.name %>
+            <tbody>
+                <tr>
+                    <td><div class = "text-center"><%= cart_item.item.name %></div></td>
+                    <td><div class = "text-center"><%= cart_item.item.with_tax_price %></div></td>
+                    <td><div class = "text-center"><%= cart_item.amount %></div></td>
+                    <td><div class = "text-center"><%= cart_item.subtotal%></div></td>
+                    <% end %>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-<%= cart_item.item.with_tax_price %>
 
-<%= cart_item.amount %>
+<div class = "col-md-3">
+     <table class = "table table-bordered">
+        <tbody>
+            <tr>
+                 <th class="bg-light d-block d-md-table-cell">送料</th>
+                 <td class="d-block d-md-table-cell">
+                     <%= f.hidden_field :delivery_charge, :value => @order.delivery_charge %>
+                     <%= @order.delivery_charge %>
+                </td>
+            </tr>
+            <tr>
+                 <th class="bg-light d-block d-md-table-cell">商品合計</th>
+                 <td class="d-block d-md-table-cell">
+                     <%= @total.round.to_s(:delimited) %>
+                </td>
+            </tr>
+            <tr>
+                 <th class="bg-light d-block d-md-table-cell">請求金額</th>
+                 <td class="d-block d-md-table-cell">
+                    <%= f.hidden_field :payment, :value => @order.delivery_charge + @total.round %>
+                    <%= @order.delivery_charge + @total.round %>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+      </div>
+                    
+</div>
+
+
+<p class="font-weight-bold">支払方法</p>
+<div class = "row">
+<div class = "col-md-1"></div>
+<div class = "col-md-8">
+    <%= f.hidden_field :payment_method, :value => @order.payment_method %>
+    <%= @order.payment_method_i18n %>
+</div>
+</div>
+
+
+<p class="font-weight-bold">お届け先</p>
+<div class = "row">
+<div class = "col-md-1"></div>
+<div class = "col-md-8">
+    <%= f.hidden_field :delivery_postal_code, :value => @order.delivery_postal_code %>
+    〒<%= @order.delivery_postal_code %>
+    <%= f.hidden_field :delivery_adress, :value => @order.delivery_adress %>
+    <%= @order.delivery_adress %><br />
+    <%= f.hidden_field :delivery_name, :value => @order.delivery_name %>
+    <%= @order.delivery_name %>
+</div>
+</div>
+
+<div class = "text-center">
+    <%= f.submit "注文を確定する", class:"btn btn-success" %>
+</div>
+
 
 <% end %>
-
-<p>送料</p>
-<%= f.hidden_field :delivery_charge, :value => @order.delivery_charge %>
-<%= @order.delivery_charge %>
-<p>商品合計</p>
-<%= @total.round.to_s(:delimited) %>
-<p>請求金額</p>
-<%= f.hidden_field :payment, :value => @order.delivery_charge + @total.round %>
-<%= @order.delivery_charge + @total.round %>
-
-<p>支払方法</p>
-<%= f.hidden_field :payment_method, :value => @order.payment_method %>
-<%= @order.payment_method_i18n %>
-
-<p>お届け先</p>
-<%= f.hidden_field :delivery_postal_code, :value => @order.delivery_postal_code %>
-<%= @order.delivery_postal_code %>
-<%= f.hidden_field :delivery_adress, :value => @order.delivery_adress %>
-<%= @order.delivery_adress %><br />
-<%= f.hidden_field :delivery_name, :value => @order.delivery_name %>
-<%= @order.delivery_name %>
-
-<%= f.submit "注文を確定する" %>
-
-<% end %>
+</div>
