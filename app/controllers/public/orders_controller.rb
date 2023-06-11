@@ -1,5 +1,5 @@
 class Public::OrdersController < ApplicationController
-  before_action :authenticate_customer!
+  
 
   def new
     @order = Order.new
@@ -49,7 +49,7 @@ class Public::OrdersController < ApplicationController
     #@order_item = @orders.order_items
     #@sum = @order_item.inject(0) { |sum, item| sum + item.subtotal }
   end
-  
+
   def show
     @order = Order.find(params[:id])
     @order_item = @order.order_items.all

@@ -19,11 +19,13 @@
     <div class = "col-md-1"></div>
     <div class = "col-md-2">
       <div class = "d-flex flex-wrap">
-        <%= image_tag item.image %>
+        <%= link_to image_tag(item.image), item_path(item.id) %>
          <figcaption class="figure-caption">
-          <%= link_to item.name, item_path(item.id) %>
+
+          <%= item.name %>
           ¥<%= item.price %>
         </figcaption>
+
       </div>
     </div>
      <% end %>
