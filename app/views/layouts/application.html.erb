@@ -12,6 +12,7 @@
 
   <body>
     <header>
+      <%= image_tag 'logo2',size:"380x130" %>
       <ul class="nav justify-content-end">
       <% if customer_signed_in? %>
       
@@ -57,5 +58,8 @@
     </ul>
     </header>
     <%= yield %>
+    <footer>
+      
+    </footer>
   </body>
 </html>

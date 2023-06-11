@@ -1,10 +1,35 @@
-<h2>商品詳細</h2>
+<div class = "container">
+  <div class = "row">
+    <div class = "col-md-1"></div>
+      <h3>商品詳細</h3>
+  </div>
 
-<div>
-  <%= image_tag @item.image %>
-  <p>商品名：<%= @item.name %></p>
-  <p>商品説明：<%= @item.introduction %></p>
-  <p>税込価格（税抜価格）：<%= number_to_currency(@item.price*1.1, :locale => 'en') %>(<%= number_to_currency(@item.price) %>)円</p>
+<div class = "row">
+  <div class = "col-md-3"></div>
+  <div class = "col-md-3">
+    <%= image_tag @item.image %>
+  </div>
+  
+  
+    <div class = "col-md-2">
+      <p></p>
+      <p>商品名</p>
+      <p>商品説明</p>
+      <p>税込価格（税抜価格）</p>
+    </div>
+    <div class = "col-md-4">
+      <p></p>
+      <p><%= @item.name %></p>
+      <p><%= @item.introduction %></p>
+      <p><%= number_to_currency(@item.price*1.1, :locale => 'en') %>(<%= number_to_currency(@item.price, :locale => 'en') %>)円</p>
+    </div>
+   
+  </div>
+  
 
-<%= link_to "編集する", edit_admin_item_path %>
+<div class = "text-center">
+  <%= link_to "編集する", edit_admin_item_path, class:"btn btn-success" %>
+</div>
+
+
 </div>
